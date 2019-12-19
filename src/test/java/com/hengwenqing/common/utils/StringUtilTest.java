@@ -2,62 +2,51 @@ package com.hengwenqing.common.utils;
 
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.junit.Test;
 
 
 
 public class StringUtilTest {
 
-	@Test
-	public void testHasLength() {
-		String str=" ";
-		System.out.println(StringUtil.hasLength(str));
+	@Test//测试是否是有效的地址
+	public void isHttpUrl() {
+		String url="https://www.baidu.com";
+			
+		System.out.println(StringUtil.isHttpUrl(url));
 	}
-
+	
 	@Test
-	public void testHasText() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRandomChineseString() {
-		String str=" ";
-		System.out.println(StringUtil.hasText(str));
-	}
-
-	@Test
-	public void testRandomChineseStringInt() {
-		String string=StringUtil.randomChineseString();
-		System.out.println(string);
-	}
-
-	@Test
-	public void testGenerateChineseName() {
-		String string=StringUtil.randomChineseString(10);
+	public void testtoUniqueTerm() {
+		String str="Spring mvc ";
+		String string=StringUtil.toUniqueTerm(str);
 		System.out.println(string);
 	}
 	
 	@Test
-	public void testPerson() {
-		for (int i = 0; i < 10000; i++) {
-			// 姓名
-			String name = StringUtil.generateChineseName();
-			// 年龄
-			int age = RandomUtil.random(1, 120);
-			// 介绍
-			String abount = StringUtil.randomChineseString(140);
-			// 注册日期
-			Calendar c = Calendar.getInstance();
-			c.set(2010, 0, 1);
+	public void testNumber() {
+		String string=StringUtil.percent(1, 3);
+		System.out.println(string);
+	}
+	
+	
+	@Test
+	public void testPercent() {
+		String string=StringUtil.percent(1, 3);
+		System.out.println(string);
+	}
+	
+	//判断是否是数字
+	@Test
+	public void testIsNumber() {
+		String string="11.1";
+		System.out.println(StringUtil.isNumber(string));
+	}
 
-			Date created = DateUtils.getDate(c.getTime(), new Date());
-			Person p = new Person(name, age, abount, created);
-			System.out.println(p);
-		}
-
+	//判断是否有值
+	@Test
+	public void testHasText() {
+		String string="aa";
+		System.out.println(StringUtil.hasText(string));
 	}
 
 }

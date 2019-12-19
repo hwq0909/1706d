@@ -2,15 +2,56 @@ package com.hengwenqing.common.utils;
 
 import java.util.Calendar;
 import java.util.Date;
-/**
- * 
- * @ClassName: DataUtil 
- * @Description: 日期工具类
- * @author: charles
- * @date: 2019年10月11日 上午11:00:15
- */
-public class DateUtils {
+
+public class DateUtil {
 	
+	
+	/**
+	 * 
+	 * @Title: getDateByfore 
+	 * @Description: TODO
+	 * @return
+	 * @return: Date
+	 */
+	public static Date getDateByfore() {
+		//先获取日历类
+		Calendar c = Calendar.getInstance();
+		//让系统时间减去1天
+		c.add(Calendar.DAY_OF_MONTH, -1);
+		return c.getTime();
+	}
+	
+	/**
+	 * 
+	 * @Title: getAge 
+	 * @Description: 根据生日计算年龄
+	 * @param brithday
+	 * @return
+	 * @return: int
+	 */
+	public static int getAge(Date brithday) {
+		//获取当前系统的日历类
+		Calendar c=Calendar.getInstance();
+		//获取当前年月日
+		int yearNow=c.get(Calendar.YEAR);
+		int monthNow=c.get(Calendar.MONTH);
+		int dateNow=c.get(Calendar.DAY_OF_MONTH);
+		c.setTime(brithday);//同生日初始化日历类
+		int yearBirth=c.get(Calendar.YEAR);
+		int monthBirth=c.get(Calendar.MONTH);
+		int dateBirth=c.get(Calendar.DAY_OF_MONTH);
+		//年龄
+		int age=yearNow-yearBirth;
+		//出生年月份大于前月份，年龄减一
+		if(monthBirth>monthNow) {
+			age--;
+		}
+		//如果月份一致并且 日期大于当前日期年龄减少一
+		if(monthBirth==monthNow&&dateBirth>dateNow) {
+			age--;
+		}
+		return age;
+	}
 	public static Date getDate(Date minDate ,Date maxDate) {
 		
 		//最小毫米数

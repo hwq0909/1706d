@@ -1,11 +1,71 @@
 package com.hengwenqing.common.utils;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Random;
 
 
 public class StringUtil {
 
+	
+	/**
+	 * 校验传入的参数是否为url
+	 * @param param
+	 * @return
+	 */
+	public static boolean isHttpUrl(String param) {
+		 URL url;  
+		 try {  
+	         url = new URL(param);  
+	         InputStream in = url.openStream();  
+	         return true; 
+	    } catch (Exception e1) {  
+	         System.out.println("连接打不开!");  
+	         url = null;  
+	    }  
+		 return false;
+		
+	}
+	
+	
+	/*
+	* 方法：生成唯一标签名，处理步骤：
+	* 1、全部变成小写；
+	* 2、清空两边的空格，把中间所有的空格替换成“-”；
+	* 3、使用URLEncoder.encode()编码
+	* 最后返回处理的结果。
+	* 举例“Spring MVC”处理后为“spring-mvc”，“Spring Mvc”处理后也为“spring-mvc”
+	*/
+	public static String toUniqueTerm(String term){
+	
+		return term.toLowerCase().trim().replace(" ", "-");
+	}
+
+	
+	public static String percent(Integer votes,Integer total ) {
+		// 创建一个数值格式化对象   
+		NumberFormat numberFormat = NumberFormat.getInstance(); 
+		// 设置精确到小数点后0位   
+		numberFormat.setMaximumFractionDigits(0); 
+		String result = numberFormat.format((float)votes/(float)total*100);
+		return result;
+	}
+
+	/**
+	 * 
+	 * @Title: isNumber 
+	 * @Description: 判断是否为数值类型TODO
+	 * @param src
+	 * @return
+	 * @return: boolean
+	 */
+	public static boolean isNumber(String src) {
+		String regex="^[0-9]+(.[0-9]+)?$";
+		return src.matches(regex);
+		
+	}
 	//方法1：判断源字符串是否有值，空引号(空白字符串)也算没值 (5分)
 	public static boolean hasLength(String src){
 	  return null!=src && src.length()>0;
